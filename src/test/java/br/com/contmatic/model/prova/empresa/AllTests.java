@@ -2,7 +2,6 @@ package br.com.contmatic.model.prova.empresa;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
-//import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
