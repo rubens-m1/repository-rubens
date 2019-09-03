@@ -139,5 +139,5 @@ public class TelefoneTest {
 		telefone.setComplemento("@#$%Â¨&*");
 		assertTrue(telefone.getComplemento().equals("@#$%Â¨&*"));
 	}
-
+	
 }

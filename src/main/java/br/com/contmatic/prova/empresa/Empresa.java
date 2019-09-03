@@ -13,57 +13,7 @@ public class Empresa {
 	private String email; 					// OK
 	private String site; 					// OK
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (cnpj ^ (cnpj >>> 32));
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + Arrays.hashCode(enderecos);
-		result = prime * result + ((nomeFantasia == null) ? 0 : nomeFantasia.hashCode());
-		result = prime * result + ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
-		result = prime * result + ((site == null) ? 0 : site.hashCode());
-		result = prime * result + Arrays.hashCode(telefones);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Empresa other = (Empresa) obj;
-		if (cnpj != other.cnpj)
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (!Arrays.equals(enderecos, other.enderecos))
-			return false;
-		if (nomeFantasia == null) {
-			if (other.nomeFantasia != null)
-				return false;
-		} else if (!nomeFantasia.equals(other.nomeFantasia))
-			return false;
-		if (razaoSocial == null) {
-			if (other.razaoSocial != null)
-				return false;
-		} else if (!razaoSocial.equals(other.razaoSocial))
-			return false;
-		if (site == null) {
-			if (other.site != null)
-				return false;
-		} else if (!site.equals(other.site))
-			return false;
-		if (!Arrays.equals(telefones, other.telefones))
-			return false;
-		return true;
-	}
+	
 
 	public String getNomeFantasia() {
 		return nomeFantasia;
@@ -147,13 +97,6 @@ public class Empresa {
 
 	}
 
-	@Override
-	public String toString() {
-		return "Empresa [nomeFantasia=" + nomeFantasia + ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj
-				+ ", enderecos=" + Arrays.toString(enderecos) + ", telefones=" + Arrays.toString(telefones) + ", email="
-				+ email + ", site=" + site + "]";
-	}
-
 	public boolean isCNPJ(String CNPJ) {
 
 		if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111") || CNPJ.equals("22222222222222")
@@ -209,4 +152,63 @@ public class Empresa {
 		}
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (cnpj ^ (cnpj >>> 32));
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + Arrays.hashCode(enderecos);
+		result = prime * result + ((nomeFantasia == null) ? 0 : nomeFantasia.hashCode());
+		result = prime * result + ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
+		result = prime * result + ((site == null) ? 0 : site.hashCode());
+		result = prime * result + Arrays.hashCode(telefones);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Empresa other = (Empresa) obj;
+		if (cnpj != other.cnpj)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (!Arrays.equals(enderecos, other.enderecos))
+			return false;
+		if (nomeFantasia == null) {
+			if (other.nomeFantasia != null)
+				return false;
+		} else if (!nomeFantasia.equals(other.nomeFantasia))
+			return false;
+		if (razaoSocial == null) {
+			if (other.razaoSocial != null)
+				return false;
+		} else if (!razaoSocial.equals(other.razaoSocial))
+			return false;
+		if (site == null) {
+			if (other.site != null)
+				return false;
+		} else if (!site.equals(other.site))
+			return false;
+		if (!Arrays.equals(telefones, other.telefones))
+			return false;
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Empresa [nomeFantasia=" + nomeFantasia + ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj
+				+ ", enderecos=" + Arrays.toString(enderecos) + ", telefones=" + Arrays.toString(telefones) + ", email="
+				+ email + ", site=" + site + "]";
+	}
+	
 }

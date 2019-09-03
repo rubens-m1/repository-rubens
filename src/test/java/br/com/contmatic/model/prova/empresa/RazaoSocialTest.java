@@ -1,5 +1,7 @@
 package br.com.contmatic.model.prova.empresa;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,6 +45,18 @@ public class RazaoSocialTest {
 		System.out.println("-------------------------");
 		System.out.println("Final de testes de Razão Social");
 		System.out.println("--------------------------");
+	}
+	
+	@Test
+	public void razao_social_pode_conter_caracteres_especiais() {
+		empresa.setRazaoSocial("Rubens *(1)*");
+		assertTrue(empresa.getRazaoSocial().equals("Rubens *(1)*"));
+	}
+
+	@Test
+	public void complemento_pode_ter_acentos() {
+		empresa.setRazaoSocial("Empresa São Judas");
+		assertTrue(empresa.getRazaoSocial().equals("Empresa São Judas"));
 	}
 
 
