@@ -8,7 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ CnpjTest.class, EmailTest.class, EnderecoTest.class, NomeFantasia.class, SiteTest.class, RazaoSocialTest.class,
-		TelefoneTest.class, TestOrdemDeExec.class })
+		TelefoneTest.class})
 public class AllTests {
 	@AfterClass
 	public static void fim_dos_testes_de_cnpj() {

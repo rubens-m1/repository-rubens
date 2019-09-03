@@ -9,10 +9,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
+import  org.junit.FixMethodOrder ;
 import org.junit.Ignore;
 import org.junit.Test;
+import  org.junit.runners.MethodSorters ;
 
 import br.com.contmatic.prova.empresa.Empresa;
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class CnpjTest {
 
@@ -56,12 +60,11 @@ public class CnpjTest {
 
 	}
 
-	@Test
+	@Test(timeout = 10)
 	public void cnpj_14_digitos() {
 		empresa.setCnpj(33280092000138l);
 		assertThat(String.valueOf(empresa.getCnpj()).length(), is(14));
 
 	}
-	
 	
 }
