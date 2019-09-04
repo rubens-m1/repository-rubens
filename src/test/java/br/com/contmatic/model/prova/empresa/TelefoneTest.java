@@ -3,6 +3,7 @@ package br.com.contmatic.model.prova.empresa;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -175,20 +176,19 @@ public class TelefoneTest {
 	   assertTrue(telefone1.hashCode() == telefone2.hashCode());
 	}
 	
-//	@Test
-//	public void nao_deve_aceitar_telefones_com_hash_code_diferentes() {
-//	    Telefone telefone1 = new Telefone();
-//		 telefone1.setDdd((byte) 11);
-//		 telefone1.setNumero(123456789);
-//		 telefone1.setRamal("1");
-//		 telefone1.setComplemento("Diretoria");
-//	     Telefone telefone2 = new Telefone();
-//		 telefone2.setDdd((byte) 11);
-//		 telefone2.setNumero(123456789);
-//		 telefone2.setRamal("2");
-//		 telefone2.setComplemento("Financeiro");
-//	   assertTrue(telefone1.equals(telefone2) && telefone2.equals(telefone1));
-//	   assertTrue(telefone1.hashCode() != telefone2.hashCode());
-//	}
+	@Test
+	public void nao_deve_aceitar_telefones_com_hash_code_diferentes() {
+	    Telefone telefone1 = new Telefone();
+		 telefone1.setDdd((byte) 11);
+		 telefone1.setNumero(123456789);
+		 telefone1.setRamal("1");
+		 telefone1.setComplemento("Diretoria");
+	     Telefone telefone2 = new Telefone();
+		 telefone2.setDdd((byte) 11);
+		 telefone2.setNumero(123456789);
+		 telefone2.setRamal("2");
+		 telefone2.setComplemento("Financeiro");
+	   assertTrue(telefone1.hashCode() != telefone2.hashCode());
+	}
 
 }
