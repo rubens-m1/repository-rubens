@@ -3,7 +3,6 @@ package br.com.contmatic.model.prova.empresa;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -44,12 +43,16 @@ public class TelefoneTest {
 
 
 	// DDD TESTES
-	@Test(expected = IllegalArgumentException.class)
-	public void validacao_de_ddd_entre_11_e_99() {
-		telefone.setDdd((byte) 20);
-
+	@Test
+	public void deve_aceitar_ddd_entre_11_e_99_valido() {
+		telefone.setDdd((byte) 11);
 	}
-
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_deve_aceitar_ddd_entre_11_e_99_invalido() {
+		telefone.setDdd((byte) 20);
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void ddd_nao_pode_ser_abaixo_de_11() {
 		telefone.setDdd((byte) -2);
@@ -58,13 +61,25 @@ public class TelefoneTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ddd_nao_pode_ser_acima_de_99() {
-		telefone.setDdd((byte) 101);
+		telefone.setDdd((byte) 100);
 	}
 
 	@Test
 	public void ddd_comprimento_de_2_digitos() {
 		telefone.setDdd((byte) 11);
 		assertThat(String.valueOf(telefone.getDdd()).length(), is(2));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_deve_aceitar_ddd_comprimento_de_1_digito() {
+		telefone.setDdd((byte) 1);
+		assertThat(String.valueOf(telefone.getDdd()).length(), is(1));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_deve_aceitar_ddd_comprimento_de_3_digitos() {
+		telefone.setDdd((byte) 111);
+		assertThat(String.valueOf(telefone.getDdd()).length(), is(3));
 	}
 
 	// NUMERO TESTES
@@ -74,7 +89,7 @@ public class TelefoneTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void numero_nao_pode_de_menos_de_8_digitos_incluindo_os_0() {
+	public void numero_nao_pode_ter_menos_de_8_digitos_incluindo_os_0() {
 		telefone.setNumero(01234567);
 	}
 
@@ -102,13 +117,13 @@ public class TelefoneTest {
 
 	// RAMAL TESTES
 	@Test
-	public void ramal_pode_ser_nulo() {
+	public void deve_aceitar_ramal_pode_ser_nulo() {
 		telefone.setComplemento(null);
 		assertTrue(telefone.getRamal() == null);
 	}
 
 	@Test
-	public void deve_acietar_ramal_0() {
+	public void deve_aceitar_ramal_0() {
 		telefone.setRamal("0");
 		assertTrue(telefone.getRamal().equals("0"));
 	}
@@ -149,11 +164,20 @@ public class TelefoneTest {
 	 telefone.setComplemento(null);
 	 System.out.println(telefone.toString());
 	}
-
-	@Test
-	public void deve_aceitar_tostrig_ddd_mais_numero_mais_ramal() {
-	 telefone.setDdd((byte) 11);
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_deve_aceitar_tostrig_com_ddd_invalido_e_numero_valido() {
+	 telefone.setDdd((byte) 0);
 	 telefone.setNumero(123456789);
+	 telefone.setRamal(null);
+	 telefone.setComplemento(null);
+	 System.out.println(telefone.toString());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_deve_aceitar_tostrig_com_ddd_valido_e_numero_invalido() {
+	 telefone.setDdd((byte) 11);
+	 telefone.setNumero(1234567);
 	 telefone.setRamal("1");
 	 telefone.setComplemento(null);
 	 System.out.println(telefone.toString());
@@ -177,7 +201,23 @@ public class TelefoneTest {
 	}
 	
 	@Test
-	public void nao_deve_aceitar_telefones_com_hash_code_diferentes() {
+	public void deve_aceitar_telefones_nao_vazios_com_o_mesmo_hash_code() {
+	    Telefone telefone1 = new Telefone();
+		 telefone1.setDdd((byte) 11);
+		 telefone1.setNumero(123456789);
+		 telefone1.setRamal("1");
+		 telefone1.setComplemento("Diretoria");
+	     Telefone telefone2 = new Telefone();
+		 telefone2.setDdd((byte) 11);
+		 telefone2.setNumero(123456789);
+		 telefone2.setRamal("1");
+		 telefone2.setComplemento("Diretoria");
+	   assertTrue(telefone1.equals(telefone2) && telefone2.equals(telefone1));
+	   assertTrue(telefone1.hashCode() == telefone2.hashCode());
+	}
+	
+	@Test
+	public void nao_deve_aceitar_telefones_nao_vazios_com_hashcode_diferentes() {
 	    Telefone telefone1 = new Telefone();
 		 telefone1.setDdd((byte) 11);
 		 telefone1.setNumero(123456789);
@@ -189,6 +229,21 @@ public class TelefoneTest {
 		 telefone2.setRamal("2");
 		 telefone2.setComplemento("Financeiro");
 	   assertTrue(telefone1.hashCode() != telefone2.hashCode());
+	}
+	
+	@Test
+	public void nao_deve_aceitar_telefones_com_hashcode_diferentes() {
+	    Telefone telefone1 = new Telefone();
+		 telefone1.setDdd((byte) 11);
+		 telefone1.setNumero(123456789);
+		 telefone1.setRamal("1");
+		 telefone1.setComplemento("Diretoria");
+	     Telefone telefone2 = new Telefone();
+		 telefone2.setDdd((byte) 11);
+		 telefone2.setNumero(123456789);
+		 telefone2.setRamal("2");
+		 telefone2.setComplemento("Financeiro");
+		 assertTrue(telefone1.hashCode() != telefone2.hashCode());
 	}
 
 }
