@@ -26,6 +26,16 @@ public class CnpjTest {
 		empresa = new Empresa();
 		System.out.println("");
 	}
+	
+//	public void init() {
+//		empresa = new Empresa(0, null, null, null);
+//		empresa.setCnpj(82304554000147l);
+//		empresa.setEnderecos(null);
+//		empresa.setRazaoSocial("Rubens");
+//		empresa.setTelefones(null);
+//		System.out.println("");
+//	}
+
 
 	@Ignore
 	@Test
@@ -70,14 +80,24 @@ public class CnpjTest {
 	public void nao_aceitar_cnpj_com_menos_de_14_digitos() {
 	 empresa.setCnpj(3280092000138l);
 	 assertThat(String.valueOf(empresa.getCnpj()).length(), is(13));
-
+	}
+	
+	@Test
+	public void identificar_cnpj_com_13_digitos() {
+		empresa.setCnpj(3280092000138l);
+		assertFalse(empresa.isCNPJ(String.valueOf(empresa.getCnpj())));
 	}
 
 	@Test
-	public void nao_aceitar_cnpj_com_mais_de_14_digitos() {
+	public void identificar_cnpj_com_15_digitos() {
 	 empresa.setCnpj(123280092000138l);
 	 assertThat(String.valueOf(empresa.getCnpj()).length(), is(15));
-
+	}
+	
+	@Test
+	public void nao_deve_aceitar_cnpj_com_mais_de_14_digitos() {
+		empresa.setCnpj(123280092000138l);
+		assertFalse(empresa.isCNPJ(String.valueOf(empresa.getCnpj())));
 	}
 	
 }

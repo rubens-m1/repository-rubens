@@ -13,8 +13,6 @@ public class Empresa {
 	private String email; 					// OK
 	private String site; 					// OK
 
-	
-
 	public String getNomeFantasia() {
 		return nomeFantasia;
 	}

@@ -298,8 +298,8 @@ public class EnderecoTest {
 
 	// TESTES DE TIPO
 	@Test(expected = NullPointerException.class)
-	public void matriz__nao_pode_ser_nula() {
-		endereco.setBairro(null);
+	public void tipo_nao_pode_ser_nula() {
+		endereco.setTipo(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
