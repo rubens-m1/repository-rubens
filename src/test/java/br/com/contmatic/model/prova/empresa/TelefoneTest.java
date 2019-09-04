@@ -140,4 +140,55 @@ public class TelefoneTest {
 		assertTrue(telefone.getComplemento().equals("@#$%Â¨&*"));
 	}
 	
+	@Test
+	public void deve_aceitar_tostrig_ddd_mais_numero() {
+	 telefone.setDdd((byte) 11);
+	 telefone.setNumero(123456789);
+	 telefone.setRamal(null);
+	 telefone.setComplemento(null);
+	 System.out.println(telefone.toString());
+	}
+
+	@Test
+	public void deve_aceitar_tostrig_ddd_mais_numero_mais_ramal() {
+	 telefone.setDdd((byte) 11);
+	 telefone.setNumero(123456789);
+	 telefone.setRamal("1");
+	 telefone.setComplemento(null);
+	 System.out.println(telefone.toString());
+	}
+
+	@Test
+	public void deve_aceitar_tostrig_ddd_mais_numero_mais_ramal_mais_complemento() {
+	 telefone.setDdd((byte) 11);
+	 telefone.setNumero(123456789);
+	 telefone.setRamal("1");
+	 telefone.setComplemento("Diretoria");
+	 System.out.println(telefone.toString());
+	}
+	
+	@Test
+	public void deve_aceitar_telefones_vazios_com_o_mesmo_hash_code() {
+	    Telefone telefone1 = new Telefone();
+	    Telefone telefone2 = new Telefone();
+	   assertTrue(telefone1.equals(telefone2) && telefone2.equals(telefone1));
+	   assertTrue(telefone1.hashCode() == telefone2.hashCode());
+	}
+	
+//	@Test
+//	public void nao_deve_aceitar_telefones_com_hash_code_diferentes() {
+//	    Telefone telefone1 = new Telefone();
+//		 telefone1.setDdd((byte) 11);
+//		 telefone1.setNumero(123456789);
+//		 telefone1.setRamal("1");
+//		 telefone1.setComplemento("Diretoria");
+//	     Telefone telefone2 = new Telefone();
+//		 telefone2.setDdd((byte) 11);
+//		 telefone2.setNumero(123456789);
+//		 telefone2.setRamal("2");
+//		 telefone2.setComplemento("Financeiro");
+//	   assertTrue(telefone1.equals(telefone2) && telefone2.equals(telefone1));
+//	   assertTrue(telefone1.hashCode() != telefone2.hashCode());
+//	}
+
 }

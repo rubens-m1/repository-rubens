@@ -66,4 +66,18 @@ public class CnpjTest {
 
 	}
 	
+	@Test
+	public void nao_aceitar_cnpj_com_menos_de_14_digitos() {
+	 empresa.setCnpj(3280092000138l);
+	 assertThat(String.valueOf(empresa.getCnpj()).length(), is(13));
+
+	}
+
+	@Test
+	public void nao_aceitar_cnpj_com_mais_de_14_digitos() {
+	 empresa.setCnpj(123280092000138l);
+	 assertThat(String.valueOf(empresa.getCnpj()).length(), is(15));
+
+	}
+	
 }
