@@ -11,7 +11,13 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-			<scope>test</scope>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.29</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
