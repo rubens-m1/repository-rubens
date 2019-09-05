@@ -18,6 +18,7 @@ public class Empresa {
 		this.setRazaoSocial(razaoSocial);
 		this.setEnderecos(enderecos);
 		this.setTelefones(telefones);
+		this.setEmail(email);
 	}
 	
 	public Empresa() {
@@ -84,7 +85,7 @@ public class Empresa {
 			if (email.charAt(i) == '@') {
 				contArroba++;
 			} else if (email.charAt(i) == ' ') {
-				throw new IllegalArgumentException("Email com espaÃ§os");
+				throw new IllegalArgumentException("Email com espaços");
 
 			}
 		}
