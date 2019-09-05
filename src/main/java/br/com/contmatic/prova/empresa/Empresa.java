@@ -5,13 +5,24 @@ import java.util.InputMismatchException;
 
 public class Empresa {
 
-	private String nomeFantasia; 			// OK
-	private String razaoSocial; 			// OK
-	private long cnpj; 						// OK
-	private Endereco[] enderecos; 			// OK
-	private Telefone[] telefones; 			// OK
-	private String email; 					// OK
-	private String site; 					// OK
+	private String nomeFantasia; 	// OK
+	private String razaoSocial; 	// OK
+	private long cnpj; 				// OK
+	private Endereco[] enderecos; 	// OK
+	private Telefone[] telefones; 	// OK
+	private String email; 			// OK
+	private String site; 			// OK
+
+	public Empresa(long cnpj, String razaoSocial, Endereco[] enderecos, Telefone[] telefones, String email) {
+		this.setCnpj(cnpj);
+		this.setRazaoSocial(razaoSocial);
+		this.setEnderecos(enderecos);
+		this.setTelefones(telefones);
+	}
+	
+	public Empresa() {
+		
+	}
 
 	public String getNomeFantasia() {
 		return nomeFantasia;
@@ -30,15 +41,17 @@ public class Empresa {
 		if (razaoSocial == null) {
 			throw new NullPointerException("Razão social bão pode ser nula");
 		}
-		
+
 	}
 
 	public long getCnpj() {
 		return cnpj;
+
 	}
 
 	public void setCnpj(long cnpj) {
 		this.cnpj = cnpj;
+		
 	}
 
 	public Endereco[] getEnderecos() {
@@ -47,6 +60,7 @@ public class Empresa {
 
 	public void setEnderecos(Endereco[] enderecos) {
 		this.enderecos = enderecos;
+		
 	}
 
 	public Telefone[] getTelefones() {
@@ -201,12 +215,12 @@ public class Empresa {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Empresa [nomeFantasia=" + nomeFantasia + ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj
 				+ ", enderecos=" + Arrays.toString(enderecos) + ", telefones=" + Arrays.toString(telefones) + ", email="
 				+ email + ", site=" + site + "]";
 	}
-	
+
 }

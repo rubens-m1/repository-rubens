@@ -26,16 +26,6 @@ public class CnpjTest {
 		empresa = new Empresa();
 		System.out.println("");
 	}
-	
-//	public void init() {
-//		empresa = new Empresa(0, null, null, null);
-//		empresa.setCnpj(82304554000147l);
-//		empresa.setEnderecos(null);
-//		empresa.setRazaoSocial("Rubens");
-//		empresa.setTelefones(null);
-//		System.out.println("");
-//	}
-
 
 	@Ignore
 	@Test

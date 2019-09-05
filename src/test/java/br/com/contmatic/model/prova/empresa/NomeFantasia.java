@@ -32,9 +32,9 @@ public class NomeFantasia {
 	
 	@AfterClass
 	public static void fim_dos_testes_de_cnpj() {
-		System.out.println("-------------------------");
+		System.out.println("---------------------------------");
 		System.out.println("Final de testes de Nome Fantasia");
-		System.out.println("--------------------------");
+		System.out.println("---------------------------------");
 	}
 
 

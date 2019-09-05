@@ -42,9 +42,9 @@ public class RazaoSocialTest {
 	
 	@AfterClass
 	public static void fim_dos_testes_de_razao_social() {
-		System.out.println("-------------------------");
+		System.out.println("----------------------------------");
 		System.out.println("Final de testes de Razão Social");
-		System.out.println("--------------------------");
+		System.out.println("----------------------------------");
 	}
 	
 	@Test

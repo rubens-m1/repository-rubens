@@ -6,6 +6,9 @@ public class Telefone {
 	private String ramal; 		//OK
 	private String complemento;	//OK
 	
+	public void listaDeTelefones() {
+		
+	}
 	
 	public byte getDdd() {
 		return ddd;
