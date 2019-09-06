@@ -46,8 +46,13 @@ public class SiteTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void site_nao_pode_ter_espacos() {
+	public void nao_pode_ter_espaco() {
 		empresa.setSite(" ");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_pode_ter_espacos_no_site() {
+		empresa.setSite("rubes .com.br");
 	}
 
 	@Test

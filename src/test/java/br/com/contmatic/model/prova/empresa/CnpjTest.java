@@ -84,8 +84,7 @@ public class CnpjTest {
 	
 	@Test(expected = NullPointerException.class)
 	public void nao_deve_aceitar_cnpj_nulo() {
-		empresa.setCnpj(null);
-		
+		empresa.setCnpj(null);	
 	}
 	
 }
