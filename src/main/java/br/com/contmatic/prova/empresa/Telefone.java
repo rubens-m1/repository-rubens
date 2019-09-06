@@ -1,15 +1,11 @@
 package br.com.contmatic.prova.empresa;
 
 public class Telefone {
-	private byte ddd;			//OK
-	private int numero;			//OK
-	private String ramal; 		//OK
-	private String complemento;	//OK
-	
-	public void listaDeTelefones() {
-		
-	}
-	
+	private byte ddd;
+	private int numero;
+	private String ramal; 
+	private String complemento;	
+
 	public byte getDdd() {
 		return ddd;
 	}
@@ -74,7 +70,6 @@ public class Telefone {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
 		result = prime * result + ddd;
 		result = prime * result + numero;
 		result = prime * result + ((ramal == null) ? 0 : ramal.hashCode());
@@ -90,11 +85,6 @@ public class Telefone {
 		if (getClass() != obj.getClass())
 			return false;
 		Telefone other = (Telefone) obj;
-		if (complemento == null) {
-			if (other.complemento != null)
-				return false;
-		} else if (!complemento.equals(other.complemento))
-			return false;
 		if (ddd != other.ddd)
 			return false;
 		if (numero != other.numero)

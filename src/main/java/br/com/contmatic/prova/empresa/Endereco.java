@@ -2,15 +2,43 @@ package br.com.contmatic.prova.empresa;
 
 public class Endereco {
 
-	private String logradouro;  //OK
-	private int numero;         //OK
-	private String cep;         //OK
-	private String complemento; //OK
-	private String bairro;      //OK
-	private String cidade;      //OK
-	private String estado;      //OK
-	private String pais;        //OK
-	private String tipo;		//OK
+	private String logradouro;
+	private Integer numero;
+	private String cep;
+	private String complemento;
+	private String bairro;
+	private String cidade;
+	private String estado;
+	private String pais;
+	private String tipo;
+
+	public Endereco(String logradouro, Integer numero, String cep, String complemento, String bairro, String cidade,
+			String estado, String pais, String tipo) {
+		super();
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.cep = cep;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.pais = pais;
+		this.tipo = tipo;
+		
+		if(this.numero < 0){
+				throw new IllegalArgumentException("O numero n]ão pode ser negativo");
+		}
+		
+		if (((this.logradouro) == null) || (this.numero == null) || ((this.cep) == null) || (this.complemento == null)
+				|| ((this.bairro) == null) || ((this.cidade) == null)
+				|| ((this.estado) == null) || ((this.pais) == null) || ((this.tipo) == null)) {
+			throw new NullPointerException("Falta preencher algum campo obrigatorio");
+		}
+	}
+
+	public Endereco() {
+
+	}
 
 	public String getLogradouro() {
 		return logradouro;
@@ -21,15 +49,16 @@ public class Endereco {
 		if (logradouro == null)
 			throw new NullPointerException("O logradouro nao pode ser nulo");
 		for (int i = 0; i < logradouro.length(); i++)
-			if (!(Character.isLetter(logradouro.charAt(i)) || Character.isDigit(logradouro.charAt(i)) || (logradouro.charAt(i) == ' ')))
-			throw new IllegalArgumentException("Nao pode caracteres especiais");
+			if (!(Character.isLetter(logradouro.charAt(i)) || Character.isDigit(logradouro.charAt(i))
+					|| (logradouro.charAt(i) == ' ')))
+				throw new IllegalArgumentException("Nao pode caracteres especiais");
 	}
-			
-	public int getNumero() {
+
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 		if (numero < 0) {
 			throw new IllegalArgumentException("O numero nao pode ser menor de 0");
@@ -37,7 +66,7 @@ public class Endereco {
 		} else {
 		}
 	}
-	
+
 	public String getCep() {
 		return cep;
 	}
@@ -46,12 +75,12 @@ public class Endereco {
 		this.cep = cep;
 		if (cep == null) {
 			throw new NullPointerException("Coloque o seu CEP");
-		} else if (cep.length() == 8){
+		} else if (cep.length() == 8) {
 			Integer.parseInt(cep);
-				if (Integer.parseInt(cep)<1) {
-					throw new IllegalArgumentException("CEP invalido");
-					
-				}
+			if (Integer.parseInt(cep) < 1) {
+				throw new IllegalArgumentException("CEP invalido");
+
+			}
 		} else {
 			throw new IllegalArgumentException("CEP invalido");
 		}
@@ -74,9 +103,10 @@ public class Endereco {
 		if (bairro == null) {
 			throw new NullPointerException("Bairro nao pode ser nulo");
 		}
-		for (int i = 0; i < bairro.length();i++)
-			if (!(Character.isLetter(bairro.charAt(i)) || (Character.isDigit(bairro.charAt(i))) || (bairro.charAt(i) == ' ')))
-			throw new IllegalArgumentException("Nao pode conter caracteres especiais");
+		for (int i = 0; i < bairro.length(); i++)
+			if (!(Character.isLetter(bairro.charAt(i)) || (Character.isDigit(bairro.charAt(i)))
+					|| (bairro.charAt(i) == ' ')))
+				throw new IllegalArgumentException("Nao pode conter caracteres especiais");
 	}
 
 	public String getCidade() {
@@ -90,7 +120,7 @@ public class Endereco {
 		for (int i = 0; i < cidade.length(); i++)
 			if (!(Character.isLetter(cidade.charAt(i)) || (cidade.charAt(i) == ' ')))
 				throw new IllegalArgumentException("Cidade nao pode conter numeros e caracteres especiais");
-				
+
 	}
 
 	public String getEstado() {
@@ -99,10 +129,10 @@ public class Endereco {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
-		if(estado == null)
-			throw new NullPointerException("Estado nÃ£o pode ser nulo");
+		if (estado == null)
+			throw new NullPointerException("Estado não pode ser nulo");
 		for (int i = 0; i < estado.length(); i++)
-			if(!(Character.isLetter(estado.charAt(i)) || (estado.charAt(i) == ' ')))
+			if (!(Character.isLetter(estado.charAt(i)) || (estado.charAt(i) == ' ')))
 				throw new IllegalArgumentException("Estado nao pode conter numeros e caracteres especiais");
 	}
 
@@ -113,7 +143,7 @@ public class Endereco {
 	public void setPais(String pais) {
 		this.pais = pais;
 		if (pais == null)
-			throw new NullPointerException("Pais nÃ£o pode ser nulo");
+			throw new NullPointerException("Pais não pode ser nulo");
 		for (int i = 0; i < pais.length(); i++)
 			if (!(Character.isLetter(pais.charAt(i)) || (pais.charAt(i) == ' ')))
 				throw new IllegalArgumentException("Pais nao pode conter numeros e caracteres especiais");
@@ -127,24 +157,25 @@ public class Endereco {
 		this.tipo = tipo;
 		if (tipo == null)
 			throw new NullPointerException("O tipo nao pode ser nulo");
-		for(int i = 0; i <tipo.length();i++)
-			if (!(Character.isLetter(tipo.charAt(i)) ||  (Character.isDigit(tipo.charAt(i))) || (tipo.charAt(i) == ' ')))
+		for (int i = 0; i < tipo.length(); i++)
+			if (!(Character.isLetter(tipo.charAt(i)) || (Character.isDigit(tipo.charAt(i))) || (tipo.charAt(i) == ' ')))
 				throw new IllegalArgumentException("Tipo nao pode conter caracteres especiais");
-		
+
+	}
+
+	@Override
+	public String toString() {
+		return "Endereco [logradouro=" + logradouro + ", numero=" + numero + ", cep=" + cep + ", complemento="
+				+ complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", pais=" + pais
+				+ ", tipo=" + tipo + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
-//		result = prime * result + cep;
-		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
-		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
-		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-		result = prime * result + ((logradouro == null) ? 0 : logradouro.hashCode());
+		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + numero;
-		result = prime * result + ((pais == null) ? 0 : pais.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
@@ -158,39 +189,17 @@ public class Endereco {
 		if (getClass() != obj.getClass())
 			return false;
 		Endereco other = (Endereco) obj;
-		if (bairro == null) {
-			if (other.bairro != null)
+		if (cep == null) {
+			if (other.cep != null)
 				return false;
-		} else if (!bairro.equals(other.bairro))
-			return false;
-		if (cep != other.cep)
-			return false;
-		if (cidade == null) {
-			if (other.cidade != null)
-				return false;
-		} else if (!cidade.equals(other.cidade))
+		} else if (!cep.equals(other.cep))
 			return false;
 		if (complemento == null) {
 			if (other.complemento != null)
 				return false;
 		} else if (!complemento.equals(other.complemento))
 			return false;
-		if (estado == null) {
-			if (other.estado != null)
-				return false;
-		} else if (!estado.equals(other.estado))
-			return false;
-		if (logradouro == null) {
-			if (other.logradouro != null)
-				return false;
-		} else if (!logradouro.equals(other.logradouro))
-			return false;
 		if (numero != other.numero)
-			return false;
-		if (pais == null) {
-			if (other.pais != null)
-				return false;
-		} else if (!pais.equals(other.pais))
 			return false;
 		if (tipo == null) {
 			if (other.tipo != null)
@@ -199,13 +208,5 @@ public class Endereco {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Endereco [logradouro=" + logradouro + ", numero=" + numero + ", cep=" + cep + ", complemento="
-				+ complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", pais=" + pais
-				+ ", tipo=" + tipo + "]";
-	}
-
 
 }

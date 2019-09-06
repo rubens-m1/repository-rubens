@@ -54,40 +54,38 @@ public class CnpjTest {
 
 	@Test
 	public void nao_aceitar_o_cnpj_invalido() {
-		empresa.setCnpj(33280092000138l);
+		empresa.setCnpj(12380092000138l);
 		assertFalse(empresa.isCNPJ(String.valueOf(empresa.getCnpj())));
-
 	}
 
 	@Test(timeout = 10)
-	public void cnpj_14_digitos() {
+	public void deve_aceitar_cnpj_com_14_digitos_valido() {
 		empresa.setCnpj(33280092000138l);
 		assertThat(String.valueOf(empresa.getCnpj()).length(), is(14));
-
 	}
 	
 	@Test
-	public void nao_aceitar_cnpj_com_menos_de_14_digitos() {
+	public void nao_deve_aceitar_cnpj_com_13_digitos() {
 	 empresa.setCnpj(3280092000138l);
 	 assertThat(String.valueOf(empresa.getCnpj()).length(), is(13));
 	}
 	
 	@Test
-	public void identificar_cnpj_com_13_digitos() {
-		empresa.setCnpj(3280092000138l);
+	public void nao_aceitar_cnpj_com_menos_de_14_digitos() {
+		empresa.setCnpj(8l);
 		assertFalse(empresa.isCNPJ(String.valueOf(empresa.getCnpj())));
-	}
-
-	@Test
-	public void identificar_cnpj_com_15_digitos() {
-	 empresa.setCnpj(123280092000138l);
-	 assertThat(String.valueOf(empresa.getCnpj()).length(), is(15));
 	}
 	
 	@Test
 	public void nao_deve_aceitar_cnpj_com_mais_de_14_digitos() {
 		empresa.setCnpj(123280092000138l);
 		assertFalse(empresa.isCNPJ(String.valueOf(empresa.getCnpj())));
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void nao_deve_aceitar_cnpj_nulo() {
+		empresa.setCnpj(null);
+		
 	}
 	
 }

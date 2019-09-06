@@ -71,9 +71,23 @@ public class EnderecoTest {
 
 	// TESTES DE NUMERO DE LOGRADOURO
 	@Test(expected = IllegalArgumentException.class)
-	public void numero_nao_pode_ser_menor_que_0() {
+	public void nao_deve_Aceitar_numero_menor_que_0() {
 		endereco.setNumero(-22);
-
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void nao_deve_aceitar_numero_vazio() {
+		endereco.setNumero(null);
+	}
+	
+	@Test
+	public void deve_aceitar_valor_maximo_de_integer_2147483647() {
+		endereco.setNumero(2147483647);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_deve_aceitar_o_valor_minimo_de_integer_pois_e_negativo() {
+		endereco.setNumero(-2147483648);
 	}
 
 	// TESTES DE CEP
@@ -81,7 +95,17 @@ public class EnderecoTest {
 	public void cep_nao_pode_ser_nulo() {
 		endereco.setCep(null);
 	}
-
+	
+	@Test
+	public void deve_aceitar_o_menor_cep_00000001() {
+		endereco.setCep("00000001");
+	}
+	
+	@Test
+	public void deve_aceitar_o_maior_cep_99999999() {
+		endereco.setCep("99999999");
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void cep_nao_pode_ser_menor_que_00000001() {
 		endereco.setCep("-00000001");
@@ -335,191 +359,81 @@ public class EnderecoTest {
 	}
 
 	@Test
-	public void deve_aceitar_tostring_endereco_completo() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo("Matriz");
-		System.out.println(endereco.toString());
+	public void deve_aceitar_tostring_endereco_completo_e_correto() {
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Filial");
+		System.out.println(endereco2.toString());
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void nao_deve_aceitar_tostring_endereco_com_tipo_nulo() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo(null);
-		System.out.println(endereco.toString());
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) null);
+		System.out.println(endereco2.toString());
+		
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void nao_deve_aceitar_tostring_endereco_com_pais_nulo() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais(null);
-		endereco.setTipo("Filial");
-		System.out.println(endereco.toString());
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) null, (String) "Filial");
+		System.out.println(endereco2.toString());
+		
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void nao_deve_aceitar_tostring_endereco_com_estado_nulo() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado(null);
-		endereco.setPais("Brasil");
-		endereco.setTipo("Filial");
-		System.out.println(endereco.toString());
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) null, (String) "Brasil", (String) "Filial");
+		System.out.println(endereco2.toString());
+		
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void nao_deve_aceitar_tostring_endereco_com_cidade_nula() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade(null);
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo("Filial");
-		System.out.println(endereco.toString());
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) null, (String) "São Paulo", (String) "Brasil", (String) "Filial");
+		System.out.println(endereco2.toString());
+		
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void nao_deve_aceitar_tostring_endereco_com_bairro_nulo() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro(null);
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo("Filial");
-		System.out.println(endereco.toString());
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) null, (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Filial");
+		System.out.println(endereco2.toString());
 	}
 
-	@Test
-	public void deve_aceitar_tostring_endereco_com_complemento_nulo() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento(null);
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo("Filial");
-		System.out.println(endereco.toString());
+	@Test(expected = NullPointerException.class)
+	public void nao_deve_aceitar_tostring_endereco_com_complemento_nulo() {
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) null,(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Filial");
+		System.out.println(endereco2.toString());
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void nao_deve_aceitar_tostring_endereco_com_cep_nulo() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep(null);
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo("Filial");
-		System.out.println(endereco.toString());
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) null,(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Filial");
+		System.out.println(endereco2.toString());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void nao_deve_aceitar_toString_endereco_com_numero_negativo() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(-123);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo("Filial");
-		System.out.println(endereco.toString());
+	public void nao_deve_aceitar_tostring_endereco_com_numero_negativo() {
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) -123,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Filial");
+		System.out.println(endereco2.toString());
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void nao_deve_aceitar_tostring_endereco_com_Logradouro_nulo() {
-		endereco.setLogradouro(null);
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo("Filial");
-		System.out.println(endereco.toString());
+	public void nao_deve_aceitar_tostring_endereco_com_logradouro_nulo() {
+		Endereco endereco2 = new Endereco((String) null, (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Filial");
+		System.out.println(endereco2.toString());
 	}
 
 	@Test
-	public void deve_aceitar_enderecos_nao_vazios_com_o_mesmo_hashcode() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo("Matriz");
-		Endereco endereco2 = new Endereco();
-		endereco2.setLogradouro("Rua tatuapé");
-		endereco2.setNumero(0);
-		endereco2.setCep("12345678");
-		endereco2.setComplemento("Perto do metro");
-		endereco2.setBairro("Tatuapé");
-		endereco2.setCidade("São Paulo");
-		endereco2.setEstado("São Paulo");
-		endereco2.setPais("Brasil");
-		endereco2.setTipo("Matriz");
+	public void deve_aceitar_enderecos_iguais_nao_vazios_com_o_mesmo_hashcode() {
+		Endereco endereco = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Matriz");
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Matriz");
 		assertTrue(endereco.equals(endereco2) && endereco2.equals(endereco));
 		assertTrue(endereco.hashCode() == endereco2.hashCode());
 	}
 	
 	@Test
-	public void nao_deve_aceitar_enderecos_nao_vazios_com_hashcodes_diferentes() {
-		endereco.setLogradouro("Rua tatuapé");
-		endereco.setNumero(0);
-		endereco.setCep("12345678");
-		endereco.setComplemento("Perto do metro");
-		endereco.setBairro("Tatuapé");
-		endereco.setCidade("São Paulo");
-		endereco.setEstado("São Paulo");
-		endereco.setPais("Brasil");
-		endereco.setTipo("Matriz");
-		Endereco endereco2 = new Endereco();
-		endereco2.setLogradouro("Rua tatuapé");
-		endereco2.setNumero(0);
-		endereco2.setCep("12345678");
-		endereco2.setComplemento("Perto do metro");
-		endereco2.setBairro("Tatuapé");
-		endereco2.setCidade("São Paulo");
-		endereco2.setEstado("São Paulo");
-		endereco2.setPais("Brasil");
-		endereco2.setTipo("Filial");
+	public void nao_deve_aceitar_enderecos_completos_com_hashcodes_diferentes() {
+		Endereco endereco = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Matriz");
+		Endereco endereco2 = new Endereco((String) "Rua Tatuapé", (int) 0,(String) "12345678",(String) "Perto do metro",(String) "Tauapé", (String) "São Paulo", (String) "São Paulo", (String) "Brasil", (String) "Filial 1");
 		assertTrue(endereco.hashCode() != endereco2.hashCode());
 	}
 	

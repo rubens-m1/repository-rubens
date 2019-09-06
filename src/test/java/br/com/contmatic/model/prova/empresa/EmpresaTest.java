@@ -148,4 +148,41 @@ public class EmpresaTest {
 		System.out.println(empresa.toString());
 	}
 	
+	@Test(expected = NullPointerException.class)
+	public void nao_deve_aceitar_empresa_sem_endereco() {
+
+		telefone.setDdd((byte) 11);
+		telefone.setNumero(123456789);
+		telefone.setRamal("1");
+		telefone.setComplemento("Diretoria");
+		telefones[0] = telefone;
+
+		empresa.setNomeFantasia("rubens");
+		empresa.setEnderecos(null);
+		empresa.setTelefones(telefones);
+		empresa.setSite("rubens.com.br");
+		
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void nao_deve_aceitar_empresa_sem_telefone() {
+		
+		endereco.setLogradouro("Rua tatuapé");
+		endereco.setNumero(0);
+		endereco.setCep("12345678");
+		endereco.setComplemento("Perto do metro");
+		endereco.setBairro("Tatuapé");
+		endereco.setCidade("São Paulo");
+		endereco.setEstado("São Paulo");
+		endereco.setPais("Brasil");
+		endereco.setTipo("Matriz");
+		enderecos[0] = endereco;
+		
+		empresa.setNomeFantasia("rubens");
+		empresa.setEnderecos(enderecos);
+		empresa.setTelefones(null);
+		empresa.setSite("rubens.com.br");
+		
+	}
+	
 }

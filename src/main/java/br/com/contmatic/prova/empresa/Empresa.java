@@ -5,13 +5,13 @@ import java.util.InputMismatchException;
 
 public class Empresa {
 
-	private String nomeFantasia; 	// OK
-	private String razaoSocial; 	// OK
-	private long cnpj; 				// OK
-	private Endereco[] enderecos; 	// OK
-	private Telefone[] telefones; 	// OK
-	private String email; 			// OK
-	private String site; 			// OK
+	private String nomeFantasia; 	
+	private String razaoSocial; 	
+	private Long cnpj; 				
+	private Endereco[] enderecos; 	
+	private Telefone[] telefones; 	
+	private String email; 			
+	private String site; 			
 
 	public Empresa(long cnpj, String razaoSocial, Endereco[] enderecos, Telefone[] telefones, String email) {
 		this.setCnpj(cnpj);
@@ -39,19 +39,22 @@ public class Empresa {
 
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
-		if (razaoSocial == null) {
-			throw new NullPointerException("Razão social bão pode ser nula");
+		if (this.razaoSocial == null) {
+			throw new NullPointerException("Razão social não pode ser nula");
 		}
 
 	}
 
-	public long getCnpj() {
+	public Long getCnpj() {
 		return cnpj;
 
 	}
 
-	public void setCnpj(long cnpj) {
+	public void setCnpj(Long cnpj) {
 		this.cnpj = cnpj;
+		if (this.cnpj == null) {
+			throw new NullPointerException("CNPJ nao pode ser nulo");
+		}
 		
 	}
 
@@ -61,6 +64,9 @@ public class Empresa {
 
 	public void setEnderecos(Endereco[] enderecos) {
 		this.enderecos = enderecos;
+		if(enderecos ==null) {
+			throw new NullPointerException();
+		}
 		
 	}
 
@@ -70,6 +76,10 @@ public class Empresa {
 
 	public void setTelefones(Telefone[] telefones) {
 		this.telefones = telefones;
+		if(telefones ==null) {
+			throw new NullPointerException();
+		}
+		
 	}
 
 	public String getEmail() {
@@ -165,57 +175,6 @@ public class Empresa {
 		}
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (cnpj ^ (cnpj >>> 32));
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + Arrays.hashCode(enderecos);
-		result = prime * result + ((nomeFantasia == null) ? 0 : nomeFantasia.hashCode());
-		result = prime * result + ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
-		result = prime * result + ((site == null) ? 0 : site.hashCode());
-		result = prime * result + Arrays.hashCode(telefones);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Empresa other = (Empresa) obj;
-		if (cnpj != other.cnpj)
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (!Arrays.equals(enderecos, other.enderecos))
-			return false;
-		if (nomeFantasia == null) {
-			if (other.nomeFantasia != null)
-				return false;
-		} else if (!nomeFantasia.equals(other.nomeFantasia))
-			return false;
-		if (razaoSocial == null) {
-			if (other.razaoSocial != null)
-				return false;
-		} else if (!razaoSocial.equals(other.razaoSocial))
-			return false;
-		if (site == null) {
-			if (other.site != null)
-				return false;
-		} else if (!site.equals(other.site))
-			return false;
-		if (!Arrays.equals(telefones, other.telefones))
-			return false;
-		return true;
-	}
 
 	@Override
 	public String toString() {

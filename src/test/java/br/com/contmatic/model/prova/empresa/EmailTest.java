@@ -39,23 +39,41 @@ public class EmailTest {
 
 
 	@Test
-	public void email_valido() {
+	public void deve_aceitar_email_valido() {
 		empresa.setEmail("rubens@contmatic.com.br");
 		assertTrue(empresa.getEmail().equals("rubens@contmatic.com.br"));
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_deve_aceitar_email_invalido_sem_arroba() {
+		empresa.setEmail("rubens.123.com.br");
+		
+	}
+	
 
 	@Test(expected = IllegalArgumentException.class)
-	public void email_nao_pode_ter_espacos() {
+	public void nao_deve_aceitar_email_invalido_com_espaco() {
 		empresa.setEmail("rubens @123.com");
 	}
-
+	
 	@Test(expected = IllegalArgumentException.class)
-	public void email_nao_pode_ter_mais_de_um_arroba() {
-		empresa.setEmail("aa@@");
+	public void nao_deve_aceitar_email_invalido_com_espaco_e_sem_arroba() {
+		empresa.setEmail("rubens .123.com");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_deve_aceitar_email_invalido_com_espaco_e_com_mais_de_um_arroba() {
+		empresa.setEmail("rubens @@123.com");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void nao_deve_aceitar_email_com_mais_de_um_arroba() {
+		empresa.setEmail("aa@@.com.br");
 	}
 
 	@Test(expected = NullPointerException.class)
-	public void email_nao_pode_ser_nulo() {
+	public void nao_deve_aceitar_email_nulo() {
 		empresa.setEmail(null);
 	}
+	
 }
