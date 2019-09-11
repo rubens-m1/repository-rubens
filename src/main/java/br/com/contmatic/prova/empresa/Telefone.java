@@ -11,7 +11,6 @@ public class Telefone {
 	private String complemento;
 
 	public Telefone(Byte ddd, Integer numero, String ramal, String complemento) {
-		super();
 		this.setDdd(ddd);
 		this.setNumero(numero);
 		this.setRamal(ramal);

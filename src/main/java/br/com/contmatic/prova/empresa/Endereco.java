@@ -179,7 +179,6 @@ public class Endereco {
 		int result = 1;
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
-		result = prime * result + ((logradouro == null) ? 0 : logradouro.hashCode());
 		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
@@ -204,11 +203,6 @@ public class Endereco {
 				return false;
 		} else if (!complemento.equals(other.complemento))
 			return false;
-		if (logradouro == null) {
-			if (other.logradouro != null)
-				return false;
-		} else if (!logradouro.equals(other.logradouro))
-			return false;
 		if (numero == null) {
 			if (other.numero != null)
 				return false;
@@ -221,7 +215,7 @@ public class Endereco {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Endereco [logradouro=" + logradouro + ", numero=" + numero + ", cep=" + cep + ", complemento="

@@ -17,7 +17,6 @@ public class TelefoneTest {
 	private Telefone telefone;
 
 	@Before
-
 	public void init() {
 		telefone = new Telefone();
 		System.out.println("");
