@@ -24,12 +24,12 @@ public class NomeFantasia {
 	@Test
 	public void este_teste_sera_ignorado() {
 	}
-	
+
 	@After
 	public void finish() {
 		System.out.println("Teste de nome fantasia realizado");
 	}
-	
+
 	@AfterClass
 	public static void fim_dos_testes_de_cnpj() {
 		System.out.println("---------------------------------");
@@ -37,7 +37,20 @@ public class NomeFantasia {
 		System.out.println("---------------------------------");
 	}
 
+	@Test
+	public void deve_aceitar_nome_fantasia_valido_com_letras() {
+		empresa.setNomeFantasia("Nome Fantasia Rubens");
+	}
 
+	@Test
+	public void deve_aceitar_nome_fantasia_valido_com_numeros() {
+		empresa.setNomeFantasia("123 4 5000");
+	}
+
+	@Test
+	public void deve_aceitar_nome_fantasia_com_letras_e_numeros() {
+		empresa.setNomeFantasia("Nome Fantasia Rubens 123");
+	}
 
 	@Test
 	public void nome_fantasia_pode_ser_nulo() {

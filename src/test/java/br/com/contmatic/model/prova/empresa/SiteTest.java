@@ -24,20 +24,18 @@ public class SiteTest {
 	@Test
 	public void este_teste_sera_ignorado() {
 	}
-	
+
 	@After
 	public void finish() {
 		System.out.println("Teste de site realizado");
 	}
-	
+
 	@AfterClass
 	public static void fim_dos_testes_de_cnpj() {
-		System.out.println("-------------------------");
+		System.out.println("--------------------------");
 		System.out.println("Final de testes de Site");
 		System.out.println("--------------------------");
 	}
-
-
 
 	@Test
 	public void site_pode_ser_nulo() {
@@ -49,10 +47,10 @@ public class SiteTest {
 	public void nao_pode_ter_espaco() {
 		empresa.setSite(" ");
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void nao_pode_ter_espacos_no_site() {
-		empresa.setSite("rubes .com.br");
+		empresa.setSite("rubens .com.br");
 	}
 
 	@Test
@@ -66,5 +64,4 @@ public class SiteTest {
 		empresa.setSite("www.rubens.com.br");
 		assertTrue(empresa.getSite().contentEquals("www.rubens.com.br"));
 	}
-
 }

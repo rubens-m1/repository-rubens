@@ -1,28 +1,36 @@
 package br.com.contmatic.prova.empresa;
 
 import java.util.Arrays;
-import java.util.InputMismatchException;
 
 public class Empresa {
 
-	private String nomeFantasia; 	
-	private String razaoSocial; 	
-	private Long cnpj; 				
-	private Endereco[] enderecos; 	
-	private Telefone[] telefones; 	
-	private String email; 			
-	private String site; 			
+	private String nomeFantasia;
 
-	public Empresa(long cnpj, String razaoSocial, Endereco[] enderecos, Telefone[] telefones, String email) {
-		this.setCnpj(cnpj);
+	private String razaoSocial;
+
+	private String cnpj;
+
+	private Endereco[] enderecos;
+
+	private Telefone[] telefones;
+
+	private String email;
+
+	private String site;
+
+	public Empresa(String nomeFantasia, String razaoSocial, String cnpj, Endereco[] enderecos, Telefone[] telefones,
+			String email, String site) {
+		super();
+		this.setNomeFantasia(nomeFantasia);
 		this.setRazaoSocial(razaoSocial);
+		this.setCnpj(cnpj);
 		this.setEnderecos(enderecos);
 		this.setTelefones(telefones);
 		this.setEmail(email);
+		this.setSite(site);
 	}
-	
+
 	public Empresa() {
-		
 	}
 
 	public String getNomeFantasia() {
@@ -38,24 +46,95 @@ public class Empresa {
 	}
 
 	public void setRazaoSocial(String razaoSocial) {
+		validarRazaoSocialNula(razaoSocial);
 		this.razaoSocial = razaoSocial;
-		if (this.razaoSocial == null) {
+	}
+
+	private void validarRazaoSocialNula(String razaoSocial) {
+		if (razaoSocial == null) {
 			throw new NullPointerException("Razão social não pode ser nula");
 		}
-
 	}
 
-	public Long getCnpj() {
+	public String getCnpj() {
 		return cnpj;
-
 	}
 
-	public void setCnpj(Long cnpj) {
+	public void setCnpj(String cnpj) {
+		validacaoDeCnpjNulo(cnpj);
+		verificacaoDeCnpj0000000000000(cnpj);
+		verificacaoDe14Digitos(cnpj);
+		verificadorDigito13(cnpj);
+		verificadorDigito14(cnpj);
 		this.cnpj = cnpj;
-		if (this.cnpj == null) {
+	}
+
+	public void verificadorDigito13(String CNPJ) {
+		char dig13;
+		int soma, i, resto, num, peso;
+		soma = 0;
+		peso = 2;
+		for (i = 11; i >= 0; i--) {
+			num = (int) (CNPJ.charAt(i) - 48);
+			soma = soma + (num * peso);
+			peso = peso + 1;
+			if (peso == 10) {
+				peso = 2;
+			}
+		}
+		resto = soma % 11;
+		if ((resto == 0) || (resto == 1)) {
+			dig13 = '0';
+		} else {
+			dig13 = (char) ((11 - resto) + 48);
+		}
+
+		if (dig13 == CNPJ.charAt(12)) {
+		} else {
+			throw new IllegalArgumentException("CNPJ invalid, erro no decimo terceiro digito");
+		}
+	}
+
+	public void verificadorDigito14(String CNPJ) {
+		char dig14;
+		int soma, i, resto, num, peso;
+		soma = 0;
+		peso = 2;
+		for (i = 12; i >= 0; i--) {
+			num = (int) (CNPJ.charAt(i) - 48);
+			soma = soma + (num * peso);
+			peso = peso + 1;
+			if (peso == 10)
+				peso = 2;
+		}
+		resto = soma % 11;
+		if ((resto == 0) || (resto == 1)) {
+			dig14 = '0';
+		} else {
+			dig14 = (char) ((11 - resto) + 48);
+		}
+		if ((dig14 == CNPJ.charAt(13))) {
+		} else {
+			throw new IllegalArgumentException("CNPJ invalid, erro no decimo terceiro digito");
+		}
+	}
+
+	private void verificacaoDe14Digitos(String cnpj) {
+		if (cnpj.length() != 14) {
+			throw new IllegalArgumentException("CNPJ deve conter 14 digitos");
+		}
+	}
+
+	private void verificacaoDeCnpj0000000000000(String cnpj) {
+		if (cnpj == "00000000000000") {
+			throw new IllegalArgumentException("Este cnpj nao e valido");
+		}
+	}
+
+	private void validacaoDeCnpjNulo(String cnpj) {
+		if (cnpj == null) {
 			throw new NullPointerException("CNPJ nao pode ser nulo");
 		}
-		
 	}
 
 	public Endereco[] getEnderecos() {
@@ -63,11 +142,14 @@ public class Empresa {
 	}
 
 	public void setEnderecos(Endereco[] enderecos) {
+		validacaoEnderecoNulo(enderecos);
 		this.enderecos = enderecos;
-		if(enderecos ==null) {
-			throw new NullPointerException();
+	}
+
+	private void validacaoEnderecoNulo(Endereco[] enderecos) {
+		if (enderecos == null) {
+			throw new NullPointerException("Endereco não pode ser nulo");
 		}
-		
 	}
 
 	public Telefone[] getTelefones() {
@@ -75,11 +157,14 @@ public class Empresa {
 	}
 
 	public void setTelefones(Telefone[] telefones) {
+		validacaoTelefonesNulos(telefones);
 		this.telefones = telefones;
-		if(telefones ==null) {
+	}
+
+	private void validacaoTelefonesNulos(Telefone[] telefones) {
+		if (telefones == null) {
 			throw new NullPointerException();
 		}
-		
 	}
 
 	public String getEmail() {
@@ -87,24 +172,35 @@ public class Empresa {
 	}
 
 	public void setEmail(String email) {
-		byte contArroba = 0;
+		validacaoEmailNulo(email);
+		verificadorDeArrobas(email);
+		verificadorDeEspacos(email);
+		this.email = email;
+	}
 
-		if (email == null)
-			throw new NullPointerException("Email nulo");
+	private void verificadorDeEspacos(String email) {
+		for (int i = 0; i < email.length(); i++) {
+			if (email.charAt(i) == ' ') {
+				throw new IllegalArgumentException("Email com espaços");
+			}
+		}
+	}
+
+	private void verificadorDeArrobas(String email) {
+		byte contArroba = 0;
 		for (int i = 0; i < email.length(); i++) {
 			if (email.charAt(i) == '@') {
 				contArroba++;
-			} else if (email.charAt(i) == ' ') {
-				throw new IllegalArgumentException("Email com espaços");
-
 			}
 		}
-		if (contArroba == 1) {
-			this.email = email;
-		} else {
+		if (contArroba != 1) {
 			throw new IllegalArgumentException("Email invalido");
 		}
+	}
 
+	private void validacaoEmailNulo(String email) {
+		if (email == null)
+			throw new NullPointerException("Email nulo");
 	}
 
 	public String getSite() {
@@ -112,75 +208,17 @@ public class Empresa {
 	}
 
 	public void setSite(String site) {
+		verificacaoDeEspacosNoSite(site);
 		this.site = site;
-		if (site != null)
-			for (int i = 0; i < site.length(); i++)
+	}
+
+	private void verificacaoDeEspacosNoSite(String site) {
+		if (site != null) {
+			for (int i = 0; i < site.length(); i++) {
 				if (site.charAt(i) == ' ')
 					throw new IllegalArgumentException("Site nao pode conter espacos");
-
-	}
-
-	public boolean isCNPJ(String CNPJ) {
-
-		if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111") || CNPJ.equals("22222222222222")
-				|| CNPJ.equals("33333333333333") || CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555")
-				|| CNPJ.equals("66666666666666") || CNPJ.equals("77777777777777") || CNPJ.equals("88888888888888")
-				|| CNPJ.equals("99999999999999") || (CNPJ.length() != 14))
-			return (false);
-
-		char dig13, dig14;
-		int sm, i, r, num, peso;
-
-		try {
-
-			sm = 0;
-			peso = 2;
-			for (i = 11; i >= 0; i--) {
-
-				num = (int) (CNPJ.charAt(i) - 48);
-				sm = sm + (num * peso);
-				peso = peso + 1;
-				if (peso == 10)
-					peso = 2;
 			}
-
-			r = sm % 11;
-			if ((r == 0) || (r == 1))
-				dig13 = '0';
-			else
-				dig13 = (char) ((11 - r) + 48);
-
-			sm = 0;
-			peso = 2;
-			for (i = 12; i >= 0; i--) {
-				num = (int) (CNPJ.charAt(i) - 48);
-				sm = sm + (num * peso);
-				peso = peso + 1;
-				if (peso == 10)
-					peso = 2;
-			}
-
-			r = sm % 11;
-			if ((r == 0) || (r == 1))
-				dig14 = '0';
-			else
-				dig14 = (char) ((11 - r) + 48);
-
-			if ((dig13 == CNPJ.charAt(12)) && (dig14 == CNPJ.charAt(13)))
-				return (true);
-			else
-				return (false);
-		} catch (InputMismatchException erro) {
-			return (false);
 		}
-	}
-
-
-	@Override
-	public String toString() {
-		return "Empresa [nomeFantasia=" + nomeFantasia + ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj
-				+ ", enderecos=" + Arrays.toString(enderecos) + ", telefones=" + Arrays.toString(telefones) + ", email="
-				+ email + ", site=" + site + "]";
 	}
 
 	@Override
@@ -212,6 +250,13 @@ public class Empresa {
 		} else if (!razaoSocial.equals(other.razaoSocial))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Empresa [nomeFantasia=" + nomeFantasia + ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj
+				+ ", enderecos=" + Arrays.toString(enderecos) + ", telefones=" + Arrays.toString(telefones) + ", email="
+				+ email + ", site=" + site + "]";
 	}
 
 }
